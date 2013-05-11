@@ -34,6 +34,8 @@ class Trip < ActiveRecord::Base
     }
   end
 
+#Can you refactor the methods below?
+
   def self.basics(trip)
     {Product.find_by_name("Oxen") =>
       (4 * multiplier[trip.city_of_origin] *
