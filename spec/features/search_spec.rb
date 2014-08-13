@@ -8,7 +8,7 @@ describe "Products", js: true do
           password_confirmation: 'password',
           role: 'admin'}
 
-  describe "GET /products", js: true do 
+  describe "GET /products", js: true do
       before (:each) do
         visit '/login'
         fill_in 'email', with: 'admin@oregonsale.com'
@@ -18,6 +18,7 @@ describe "Products", js: true do
 
     context "user not logged in" do
       it "cannot create new product" do
+        pending
         visit "/"
         fill_in 'search', with: 'rations'
         click_on("click_search")
