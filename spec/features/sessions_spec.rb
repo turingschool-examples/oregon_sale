@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Sessions", js: true do
+describe "Sessions" do
   include_context "standard test dataset"
 
   context "when user logs in" do

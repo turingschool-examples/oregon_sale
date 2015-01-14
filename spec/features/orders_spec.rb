@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Orders", js: true do
+describe "Orders" do
   include_context "standard test dataset"
 
   let!(:u1) {User.create full_name: "admin",

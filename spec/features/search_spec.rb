@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Products", js: true do
+describe "Products" do
   include_context "standard test dataset"
   let!(:u1) {User.create full_name: "admin",
           email: 'admin@oregonsale.com',
@@ -8,7 +8,7 @@ describe "Products", js: true do
           password_confirmation: 'password',
           role: 'admin'}
 
-  describe "GET /products", js: true do
+  describe "GET /products" do
       before (:each) do
         visit '/login'
         fill_in 'email', with: 'admin@oregonsale.com'

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Users", js: true do
+describe "Users" do
   include_context "standard test dataset"
 
   context "when user credentials are invalid" do

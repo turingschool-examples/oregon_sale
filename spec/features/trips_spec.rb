@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Trips", js: true do
+describe "Trips" do
   include_context "standard test dataset"
 
   describe 'new' do
