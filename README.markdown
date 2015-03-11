@@ -6,11 +6,12 @@ To deal with the dependencies for this project, try these instructions at your t
 
 ```
 rvm use 1.9.3
+brew update
 brew install v8
 gem install therubyracer
-bundle update therubyracer
 bundle
 bundle exec rake db:migrate db:test:prepare
+bundle exec rspec spec
 ```
 
 ### Notes
