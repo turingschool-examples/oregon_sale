@@ -12,9 +12,16 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validates_uniqueness_of :email
 
+  before_save :fill_missing_attributes
+
   ROLES = %w[superuser admin user]
 
   def role?(role)
     self.role == role.to_s
   end
+
+  def fill_missing_attributes
+    self.role = "user" unless role
+  end
 end
+

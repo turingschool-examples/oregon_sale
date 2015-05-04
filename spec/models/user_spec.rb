@@ -60,7 +60,7 @@ describe User do
         User.create(full_name: "bob", email: "someone@oregonsale.com",
           password: "pw", password_confirmation: "pw")
       end
-        
+
       it "is invalid" do
         new_user.email = "someone@oregonsale.com"
         expect(new_user).to be_invalid
@@ -70,6 +70,27 @@ describe User do
         new_user.email = "someone@oregonsale.com"
         expect(new_user).to have(1).errors_on(:email)
       end
+    end
+  end
+
+  describe "filling in user's role" do
+    let(:new_user) do
+      User.new(full_name: "bob",
+               email: "Bob@oregonsale.com",
+               password: "password",
+               password_confirmation: "password")
+    end
+
+    it "fills a user's role as :user if not provided" do
+      expect(new_user.role).to be_nil
+      new_user.save
+      expect(new_user.role).to eq("user")
+    end
+
+    it "leaves original value if provided" do
+      new_user.role = "admin"
+      new_user.save
+      expect(new_user.role).to eq("admin")
     end
   end
 end

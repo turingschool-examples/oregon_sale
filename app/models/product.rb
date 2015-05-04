@@ -51,4 +51,7 @@ class Product < ActiveRecord::Base
     end
   end
 
+  def retired?
+    retired == true
+  end
 end
