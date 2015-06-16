@@ -9,6 +9,7 @@ gem 'aws-sdk'
 gem 'sorcery'
 gem 'cancan'
 gem 'stripe'
+gem 'pry'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -22,7 +23,7 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '2.14.1'
   gem 'unicorn'
   gem 'simplecov'
   gem 'fabrication'

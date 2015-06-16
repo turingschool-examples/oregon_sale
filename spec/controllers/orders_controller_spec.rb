@@ -39,18 +39,9 @@ describe OrdersController do
   end
 
   describe "POST create" do
-    describe "with valid params and logged in" do
-      before(:each) do
-        login_user(user)
-      end
-    end
-
     describe "with invalid params" do
-      before(:each) do
-        login_user(user)
-      end
-
       it "re-renders the 'new' template" do
+        ApplicationController.any_instance.stub(:current_user).and_return(user)
         # Trigger the behavior that occurs when invalid params are submitted
         Order.any_instance.stub(:save).and_return(false)
         post :create, {:order => { "status" => "invalid value" }}
