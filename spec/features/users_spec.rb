@@ -34,7 +34,7 @@ describe "Users" do
       fill_in 'email', with: 'user@oregonsale.com'
       fill_in 'password', with: 'password'
       click_button 'Log in'
-      
+
       visit profile_path
       page.should have_content "Invoices for joe schmo"
     end

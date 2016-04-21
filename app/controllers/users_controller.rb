@@ -5,10 +5,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    @user.role = :user unless @user.role
-    if @user.email
-      @user.display_name = @user.full_name unless @user.display_name
-    end
+    @user.display_name = @user.full_name unless @user.display_name
 
     if @user.save
       auto_login(@user)
