@@ -1,5 +1,5 @@
 class LineItemsController < ApplicationController
-  before_filter :set_line_item, only: [:increase]
+  before_filter :set_line_item, only: [:increase, :decrease]
   before_filter :increase_line_item, only: [:increase]
 
   def set_line_item
@@ -35,17 +35,7 @@ class LineItemsController < ApplicationController
   end
 
   def decrease
-    @line_item = LineItem.find(params[:id])
-    if @line_item
-      if @line_item.quantity <= 1
-        @line_item.delete
-        redirect_to @line_item.cart,
-                    notice: 'Product quantity has been updated.'
-      else
-        @line_item.update_attribute("quantity", @line_item.decrease_quantity)
-        redirect_to @line_item.cart,
-                    notice: 'Product quantity has been updated.'
-      end
-    end
+    @line_item.decrease_quantity
+    redirect_to @line_item.cart, notice: 'Product quantity has been updated.'
   end
 end

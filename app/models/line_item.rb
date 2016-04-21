@@ -12,7 +12,11 @@ class LineItem < ActiveRecord::Base
   end
 
   def decrease_quantity
-    quantity - 1
+    if quantity <= 1
+     delete
+    else
+      quantity - 1
+    end
   end
 
   def total
