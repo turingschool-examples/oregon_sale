@@ -1,4 +1,15 @@
 class LineItemsController < ApplicationController
+  before_filter :set_line_item, only: [:increase]
+  before_filter :increase_line_item, only: [:increase]
+
+  def set_line_item
+    @line_item = LineItem.find(params[:id])
+  end
+
+  def increase_line_item
+    @line_item.update_attribute("quantity", @line_item.increase_quantity) if @line_item
+  end
+
   def create
     @cart = current_cart
     product = Product.find(params[:product_id])
@@ -20,11 +31,7 @@ class LineItemsController < ApplicationController
   end
 
   def increase
-    @line_item = LineItem.find(params[:id])
-    if @line_item
-      @line_item.update_attribute("quantity", @line_item.increase_quantity)
-      redirect_to @line_item.cart, notice: 'Product quantity has been updated.'
-    end
+    redirect_to @line_item.cart, notice: 'Product quantity has been updated.'
   end
 
   def decrease
