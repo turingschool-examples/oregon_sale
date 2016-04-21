@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_filter :set_product, only: [:show]
+  before_filter :set_product, only: [:show, :retire]
   before_filter :check_retired_product, only: [:show]
 
   def check_retired_product
@@ -27,11 +27,8 @@ class ProductsController < ApplicationController
   end
 
   def retire
-    product = Product.find(params[:id])
-    authorize! :update, product
-    product.retired = true
-    product.save
-
+    authorize! :update, @product
+    @product.update_attribute("retired", true)
     redirect_to admin_path
   end
 
