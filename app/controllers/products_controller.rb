@@ -1,4 +1,18 @@
 class ProductsController < ApplicationController
+  before_filter :set_product, only: [:show]
+  before_filter :check_retired_product, only: [:show]
+
+  def check_retired_product
+    redirect_to home_show_path if @product.retired?
+  end
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  def show
+  end
+
   def index
 
     @dashboard = Dashboard.new
@@ -30,15 +44,7 @@ class ProductsController < ApplicationController
     redirect_to admin_path
   end
 
-  def show
-    @product = Product.find(params[:id])
 
-    if @product.retired == true
-      redirect_to home_show_path
-    else
-      render :show
-    end
-  end
 
   def new
     @product = Product.new
