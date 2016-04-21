@@ -26,15 +26,14 @@ class OrdersController < ApplicationController
   end
 
   def new
-    if current_cart.calculate_total_cost <= 50
-      flash[:error] =
-        "Sorry Partner. Your cart must contain at least $0.51 worth of goods."
-      redirect_to root_path and return
+    if current_cart.meets_minimum?
+      @order = Order.new
+      authorize! :create, Order
+      redirect_to root_path
+    else
+      flash[:error] = "Sorry Partner. Your cart must contain at least $0.51 worth of goods."
+      render :new
     end
-    @order = Order.new
-    authorize! :create, Order
-
-    render :new
   end
 
   def edit

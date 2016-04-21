@@ -17,6 +17,10 @@ class Cart < ActiveRecord::Base
     line_items.map { |item| item.total }.inject(0, :+)
   end
 
+  def meets_minimum?
+    true if calculate_total_cost <= 50
+  end
+
   #def cart_cost(cart)
   #  cart = current_cart
   #  subtotals = cart.line_items.map do |item|
