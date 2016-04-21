@@ -1,4 +1,10 @@
 class OrdersController < ApplicationController
+  before_filter :set_order, only: [:change_status]
+
+  def set_order
+    @order = Order.find(params[:id])
+  end
+
   def index
     @orders = Order.all
     authorize! :manage, Order
@@ -15,9 +21,7 @@ class OrdersController < ApplicationController
   end
 
   def change_status
-    order = Order.find(params[:id])
-    order.status = params[:status]
-    order.save
+    @order.update_attributes(status: params[:status])
     redirect_to "/admin"
   end
 
