@@ -36,6 +36,6 @@ class LineItemsController < ApplicationController
 
   def decrease
     @line_item.decrease_quantity
-    redirect_to @line_item.cart, notice: 'Product quantity has been updated.'
+    redirect_to @line_item.cart,notice: 'Product quantity has been updated.'
   end
 end

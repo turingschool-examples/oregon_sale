@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_filter :set_product, only: [:show, :retire]
+  before_filter :set_product, only: [:show, :retire, :update]
   before_filter :check_retired_product, only: [:show]
 
   def check_retired_product
@@ -67,16 +67,9 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product = Product.find(params[:id])
     authorize! :update, @product
-
-    params[:product][:retired] ||= []
-    params[:product][:category_ids] ||= []
-    @product = Product.find(params[:id])
-
-    if @product.update_attributes(params[:product])
-      redirect_to @product, notice: 'Product was successfully updated.'
-    end
+    @product.update_attributes(params[:product])
+    redirect_to @product, notice: 'Product was successfully updated.'
   end
 
   def destroy
